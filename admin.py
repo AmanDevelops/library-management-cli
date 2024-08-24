@@ -50,11 +50,6 @@ if ch == "1":
 					if check_internet():
 						with console.status("[bold green]Sending Email...") as status:
 							return_date = (today+datetime.timedelta(days=15)).strftime('%A %d %B %Y')
-							try:
-								send_issue(sinfo[5],binfo[0],binfo[1], binfo[2],return_date,sinfo[2])
-							except:
-								print("[red]Error While Sending E-Mail")
-							console.log(f"E-Mail Sent! ")
 					else:
 						print("[red]Not Connected To Internet[/]")
 				break
@@ -82,14 +77,6 @@ elif ch == "2":
 				mydb.commit()
 				sinfo = mycur.execute(f"SELECT * FROM ACCOUNTS WHERE ID = {binfo[4]}").fetchone()
 				print("[green]Book has Been Returned!")
-				if check_internet():
-					try:
-						with console.status("[bold green]Sending E-Mail... ") as status:
-							send_ret(sinfo[5], binfo[0], binfo[1], binfo[2], datetime.date.today().strftime('%A %d %B %Y'), sinfo[2],sinfo[4]+fine, fine)
-					except:
-						print("[red]Error While Sending E-Mail")
-				else:
-					print("[red]Not Connected To Internet!")
 		else:
 			print("[yellow]The Book is not Issued")
 		if input("Want to return More[red](y/n)[/]") in ("n", "nn", "not"):

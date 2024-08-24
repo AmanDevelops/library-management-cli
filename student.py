@@ -5,7 +5,6 @@ from fuzzywuzzy import process
 from prettytable import PrettyTable
 from utils import *
 import random, time
-from mail import *
 
 
 os.system('cls')
@@ -90,20 +89,15 @@ elif ch == "3":
 			print("Email Already Exists! Try again.")
 		else:
 			break	
-	code = random.randint(100000,999999)
-	with open("data.pickle", "rb") as f:
-		data = pickle.load(f)
-		username = data[2]
-	if check_internet():
-		send_verify(emailid,code,username)
-		while True:
-			if input("Enter OTP > ") == str(code):
-				mycur.execute(f"UPDATE ACCOUNTS SET EMAIL = '{emailid}' WHERE ID = {data[0]}")
-				mydb.commit()
-				print("EMail ID Updated Successfully")
-				break
-			else:
-				print("Try Again")
+	
+
+
+		if input("Enter OTP > ") == str(code):
+			mycur.execute(f"UPDATE ACCOUNTS SET EMAIL = '{emailid}' WHERE ID = {data[0]}")
+			mydb.commit()
+			print("EMail ID Updated Successfully")
+		else:
+			print("Try Again")
 	else:
 		print("Please Connect To Internet")
 elif ch == "4":
@@ -131,9 +125,7 @@ elif ch == "5":
 				data2 = generate_payment(input("Enter Mobile Number>>"), linkid,ammount,note)
 				mycur.execute(f"""UPDATE ACCOUNTS SET LINKID = '{data2["link_id"]}' WHERE ID = {data[0]}""")
 				mydb.commit()
-				print("Sending Mail...")
-				send_payment(data[5],data[2], ammount, data2["link_url"])
-				print("Mail Successfully Sent!")
+				print(data2["link_url"])
 			else:
 				print("Please Check Your Internet Connection and Try Again")
 		elif chch == "2":

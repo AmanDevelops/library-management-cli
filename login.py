@@ -2,7 +2,6 @@ import os
 from db import mycur, mydb
 import pickle
 import hashlib
-from mail import *
 import random
 from utils import check_email
 
@@ -42,17 +41,12 @@ def login_func():
 					break
 
 			password = hashlib.md5(input("Enter Your password : ").encode()).hexdigest()
-			code = random.randint(100000,999999)
-			send_verify(eml,code,uname)
-			while True:
-				if int(input("Enter Your Code >> ")) == code:
-					mycur.execute(f"INSERT INTO ACCOUNTS (TYPE,USERNAME,PASSWORD,EMAIL) VALUES('S','{uname}','{password}','{eml}')")
-					mydb.commit()
-					print("Account Created Successfully! ")
-					mycur.execute(f"SELECT * FROM ACCOUNTS WHERE USERNAME = '{uname}'")
-					ldta = mycur.fetchone()
-					send_reg(ldta[5],ldta[2], ldta[0])
-					break
+
+			mycur.execute(f"INSERT INTO ACCOUNTS (TYPE,USERNAME,PASSWORD,EMAIL) VALUES('S','{uname}','{password}','{eml}')")
+			mydb.commit()
+			print("Account Created Successfully! ")
+			mycur.execute(f"SELECT * FROM ACCOUNTS WHERE USERNAME = '{uname}'")
+			ldta = mycur.fetchone()
 		if ch == "2":
 			while True:
 				uname = input("Enter Your Username : ")
@@ -79,18 +73,25 @@ def login_func():
 					print("No Username Found! Try Again")
 				else:
 					break
-			code = random.randint(100000,999999)
-			send_reset(sdata[5],code,uname)
+			# code = random.randint(100000,999999)
+			# send_reset(sdata[5],code,uname)
 
-			while True:
-				if int(input("Enter Your Code >> ")) == code:
-					password = hashlib.md5(input("Enter Your New password : ").encode()).hexdigest()
-					mycur.execute(f"UPDATE ACCOUNTS SET PASSWORD = '{password}' WHERE USERNAME = '{uname}'")
-					mydb.commit()
-					print("Password Changed Successfully! ")
-					mycur.execute(f"SELECT * FROM ACCOUNTS WHERE USERNAME = '{uname}'")
-					ldta = mycur.fetchone()
-					break
+			# while True:
+			# 	if int(input("Enter Your Code >> ")) == code:
+			# 		password = hashlib.md5(input("Enter Your New password : ").encode()).hexdigest()
+			# 		mycur.execute(f"UPDATE ACCOUNTS SET PASSWORD = '{password}' WHERE USERNAME = '{uname}'")
+			# 		mydb.commit()
+			# 		print("Password Changed Successfully! ")
+			# 		mycur.execute(f"SELECT * FROM ACCOUNTS WHERE USERNAME = '{uname}'")
+			# 		ldta = mycur.fetchone()
+			# 		break
+			
+			password = hashlib.md5(input("Enter Your New password : ").encode()).hexdigest()
+			mycur.execute(f"UPDATE ACCOUNTS SET PASSWORD = '{password}' WHERE USERNAME = '{uname}'")
+			mydb.commit()
+			print("Password Changed Successfully! ")
+			mycur.execute(f"SELECT * FROM ACCOUNTS WHERE USERNAME = '{uname}'")
+			ldta = mycur.fetchone()
 
 						
 	elif role == "2":
