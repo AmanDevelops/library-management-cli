@@ -1,4 +1,4 @@
-# Library Management System
+# 📚Library Management System
 
 The project will be implemented using Python, a popular programming
 language known for its simplicity and ease of use. The library management
@@ -21,7 +21,7 @@ selected student you will see three option
     2. **Login**: Enter your username and password
     3. **Reset password**: verify your email and reset your password
 
-## Menu for Admin
+## 🛡️Menu for Admin
 
 1. **Issue Books**: the “issue book” function takes book ID and student ID,
 marks the book as issued to the student in the database, sends an
@@ -46,7 +46,7 @@ book from the library's database by specifying the book's ID.
 information about a specific student, such as their username, email,
 and total payable fine.
 
-## Menu For Student
+## 🙍🏻‍♂️Menu For Student
 
 1. **Check Availability**: The "check availability" functionality in a menu-driven program allows the user to check the availability of a specific
 book in the library's database.
@@ -66,18 +66,78 @@ the transaction. The Payment can be done in any methods like UPI,
 Debit-Cards etc. The program should then update the user's account in
 the database to reflect the paid fine.
 
+# 🛠️Installation Guide
 
-## Table Schema
+Follow these steps to set up and run the project on your local machine.
 
-```sql
-CREATE TABLE BOOKS (ID INTEGER PRIMARY KEY UNIQUE NOT NULL, TITLE CHAR NOT NULL, AUTHOR CHAR NOT NULL, PRICE NUMERIC NOT NULL, ISSUED_TO INTEGER DEFAULT (0), ISSUE_DATE DATE, RESERVED INTEGER DEFAULT (0))
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/AmanDevelops/library-management-cli.git
+cd library-management-cli
 ```
 
-```sql
-CREATE TABLE ACCOUNTS (ID INTEGER PRIMARY KEY AUTOINCREMENT, TYPE VARCHAR (1), USERNAME VARCHAR (20), PASSWORD VARCHAR (64), AMMOUNT NUMERIC DEFAULT (0), EMAIL CHAR (32), LINKID CHAR)
+### 2. Create and Activate a Virtual Environment
+For MacOS/linux:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+For Windows:
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+### 3. Install Required Packages
+``` bash
+pip install -r requirements.txt
+```
+### 4. Run the Application
+``` bash
+python main.py
 ```
 
-## Screenshots
+## Admin Credentials
+
+To access the admin panel, use the following credentials:
+
+**Username:** `admin`  
+**Password:** `password`
+
+## User Credentials
+
+To access the student panel, use the following credentials:
+
+**Username:** `user`  
+**Password:** `user`
+
+
+
+## 📊Table Schema
+
+``` sql
+CREATE TABLE BOOKS (
+    ID INTEGER PRIMARY KEY UNIQUE NOT NULL,
+    TITLE CHAR NOT NULL,
+    AUTHOR CHAR NOT NULL,
+    PRICE NUMERIC NOT NULL,
+    ISSUED_TO INTEGER DEFAULT (0),
+    ISSUE_DATE DATE,
+    RESERVED INTEGER DEFAULT (0));
+```
+
+``` sql
+CREATE TABLE ACCOUNTS (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    TYPE VARCHAR (1),
+    USERNAME VARCHAR (20),
+    PASSWORD VARCHAR (64),
+    AMMOUNT NUMERIC DEFAULT (0),
+    EMAIL CHAR (32),
+    LINKID CHAR);
+```
+
+## 📷Screenshots
 Home Screen
 
 ![home](https://github.com/user-attachments/assets/df72cd05-7ee4-4734-979f-f58635c20077)
