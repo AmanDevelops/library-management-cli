@@ -97,6 +97,21 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## Admin Credentials
+
+To access the admin panel, use the following credentials:
+
+**Username:** `admin`  
+**Password:** `password`
+
+## User Credentials
+
+To access the student panel, use the following credentials:
+
+**Username:** `user`  
+**Password:** `user`
+
+
 
 ## 📊Table Schema
 
